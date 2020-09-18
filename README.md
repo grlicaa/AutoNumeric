@@ -7,7 +7,7 @@ A demo application is available on apex.oracle.com<br/>
 https://apex.oracle.com/pls/apex/f?p=122979
 
 ## Preview
-![](https://raw.githubusercontent.com/grlicaa/IconPicker/master/docs/preview/AutoNumericPreview.gif)
+![](https://github.com/grlicaa/AutoNumeric/blob/master/docs/preview/AutoNumericPreview.gif)
 
 ## Install
 
