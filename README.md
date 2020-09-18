@@ -1,6 +1,7 @@
 # AutoNumeric (AN)
 
 APEX Plug-in built on top of [AutoNumeric.js](http://autonumeric.org/) library.
+Plugin even uses NLS setting, to detect database setting ".," or ".,".
 
 ## Demo
 A demo application is available on apex.oracle.com<br/>

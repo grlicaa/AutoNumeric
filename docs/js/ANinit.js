@@ -1,15 +1,15 @@
 /**
- * ANinit.js v1.0 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
+ * ANinit.js v1.0.0 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
  * User with Oracle APEX plug-in to render data
  * © 2020 Andrej Grlica
  * Dependencies : autonumeric.js@4.6.0
  * Released under the MIT License.
  */
-function ANgetNumStr(pVal, pOpt) {
+function ANgetNumStr(pVal, pOpt, isRplace) {
 	var x = document.createElement("input");
 	    x.setAttribute("type", "hidden");
 	
-	var anElement  = new AutoNumeric(x, pVal, pOpt );
+	var anElement  = new AutoNumeric(x, (isRplace?((""+pVal).replace(",",".")):pVal), pOpt );
 	var lreturn = anElement.getFormatted();	
 	var lclasses = $(x).attr("class");
 
@@ -17,20 +17,21 @@ function ANgetNumStr(pVal, pOpt) {
 	return {val:lreturn, class:lclasses};
 }
 
-function ANIGevents(itemId, opt) {
+function ANIGevents(itemId, opt, isRplace) {
     
 	var ANelem;
 
 	$("#"+itemId).focusin(function(hnd) {
-		ANelem = new AutoNumeric(this, opt );	
-		ANelem.set($(this).val());
-		if ($(this).val() == "" && ANelem.settings.styleRules.ranges) {
+		lVal = $(this).val();
+		ANelem = new AutoNumeric(this, (isRplace?((""+lVal).replace(",",".")):lVal) , opt );	
+		//ANelem.set(lVal);
+		if (lVal == "" && ANelem.settings.styleRules.ranges) {
 			Object.getOwnPropertyNames(ANelem.settings.styleRules.ranges).forEach(function(val, idx, array) {
 				if (val = "class")
 					$("#"+itemId).removeClass(ANelem.settings.styleRules.ranges[val]);
 			  });
 		}
-		else if ($(this).val() == "" && ANelem.settings.styleRules && !ANelem.settings.styleRules.ranges) {
+		else if (lVal == "" && ANelem.settings.styleRules && !ANelem.settings.styleRules.ranges) {
 			Object.getOwnPropertyNames(ANelem.settings.styleRules).forEach(function(val, idx, array) {
 				$("#"+itemId).removeClass(ANelem.settings.styleRules[val]);
 			  });
@@ -41,7 +42,7 @@ function ANIGevents(itemId, opt) {
 	$("#"+itemId).focusout(function() {
 		var result  = "";
 		if (ANelem.get()!="") {
-			result = ANelem.getNumber();
+			result =(isRplace?((""+ ANelem.getNumber()).replace(".",",")): ANelem.getNumber()) ;
 		}
 		ANelem.remove();
 		$(this).val(result);
@@ -59,7 +60,7 @@ function ANIGsetAliment(itemId) {
 	}
 }
 
-function ANIGinit(itemId, opt) {
+function ANIGinit(itemId, opt, isRplace) {
   var index = 0;
   const item$ = $('#'+itemId);
   const sr$ = item$.addClass('u-vh is-focusable')
@@ -69,7 +70,7 @@ function ANIGinit(itemId, opt) {
 
   function render(full, value) {
 	var p_val = value||"fa-navicon";
-	var showVal = ANgetNumStr(value, opt);	
+	var showVal = ANgetNumStr(value, opt, isRplace);	
     const out = apex.util.htmlBuilder();
     out.markup('<div')
 	  .attr('class', 'ig-div-autonumeric '+(showVal.class?"ig-autonumeric-custom "+showVal.class:""))
@@ -80,7 +81,7 @@ function ANIGinit(itemId, opt) {
       .attr('id', itemId+'_'+index+'_0')
 	  .attr('name', itemId+'_'+index)
 	  .attr('data-class', (showVal.class?showVal.class:""))
-      .attr('value', value)
+      .attr('value', (isRplace?((""+value).replace(",",".")):value))
       .attr('tabindex', -1)
       .optionalAttr('disabled', false)
       .markup(' /><label')
@@ -97,7 +98,7 @@ function ANIGinit(itemId, opt) {
 
 	$( document ).ready(function() {
 		//add events focus in/out
-		ANIGevents(itemId, opt);
+		ANIGevents(itemId, opt, isRplace);
   
 		//add aliment
 		ANIGsetAliment(itemId);
@@ -105,8 +106,8 @@ function ANIGinit(itemId, opt) {
   
   apex.item.create(itemId, {
     setValue:function(pValue, pDisplayValue) {
-      item$.val(pValue);
-	  item$.closest('label').text(pDisplayValue);
+	  item$.val(pValue);
+	  item$.closest('label').text(pDisplayValue);	  
     },
 	
     disable:function() {
@@ -128,8 +129,10 @@ function ANIGinit(itemId, opt) {
   
 }
 
-function ANForminit(itemId, opt) {
-	
+function ANForminit(itemId, opt, isRplace) {
+
+	console.log("itemId, opt, isRplace",itemId, opt, isRplace);
+
 	new AutoNumeric("#"+itemId, opt);
 	
 	
@@ -139,7 +142,7 @@ function ANForminit(itemId, opt) {
 			if (el.get()!="") {
 				 var result = el.getNumber()
 				 el.remove();
-				 apex.item(itemId ).setValue(result);
+				 apex.item(itemId ).setValue((isRplace?((""+result).replace(".",",")):result));
 			 }
 		}
 	} );
