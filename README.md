@@ -77,9 +77,10 @@ style="text-align:right;"
 <pre>
 {
     currencySymbol: " €",
-    aSep: '.', 
-    aDec: ',',
-    aForm: true
+    currencySymbolPlacement: "s",
+    decimalCharacter: ",",
+    decimalCharacterAlternative: ".",
+    digitGroupSeparator: "."
 }
 </pre><br>
 #### Simple style
@@ -166,7 +167,7 @@ More on css clsses on [Universal Theme references](https://apex.oracle.com/pls/a
 
 ## About me
 Andrej Grlica<br/>
-Company The Right Thing Solutions<br/>
+Company The RIGHT THING Solutions<br/>
 I have been an Oracle APEX Developer since 2008<br/>
 When I'm not focusing on a code problem, you can find me on:<br/>
 Work Email : [andrej.grlica@right-thing.solutions](mailto:andrej.grlica@right-thing.solutions)<br/>
