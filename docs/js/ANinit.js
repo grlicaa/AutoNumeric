@@ -131,10 +131,7 @@ function ANIGinit(itemId, opt, isRplace) {
 
 function ANForminit(itemId, opt, isRplace) {
 
-	console.log("itemId, opt, isRplace",itemId, opt, isRplace);
-
 	new AutoNumeric("#"+itemId, opt);
-	
 	
 	apex.jQuery( apex.gPageContext$ ).on( "apexbeforepagesubmit", function() {
 		if (AutoNumeric.isManagedByAutoNumeric("#"+itemId)) {
