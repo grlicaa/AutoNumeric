@@ -28,7 +28,7 @@ prompt APPLICATION 132 - AutoNumeric [Plug-in]
 -- Application Export:
 --   Application:     132
 --   Name:            AutoNumeric [Plug-in]
---   Date and Time:   15:23 Friday September 18, 2020
+--   Date and Time:   15:42 Friday September 18, 2020
 --   Exported By:     ANDREJ.GRLICA@RIGHT-THING.SOLUTIONS
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -113,7 +113,7 @@ wwv_flow_api.create_flow(
 ,p_csv_encoding=>'Y'
 ,p_friendly_url=>'N'
 ,p_last_updated_by=>'ANDREJ.GRLICA@RIGHT-THING.SOLUTIONS'
-,p_last_upd_yyyymmddhh24miss=>'20200918152303'
+,p_last_upd_yyyymmddhh24miss=>'20200918154105'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>61
 ,p_ui_type_name => null
@@ -18108,7 +18108,7 @@ wwv_flow_api.create_page(
 '}'))
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'ANDREJ.GRLICA@RIGHT-THING.SOLUTIONS'
-,p_last_upd_yyyymmddhh24miss=>'20200918152249'
+,p_last_upd_yyyymmddhh24miss=>'20200918154105'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(40306886097832645)
@@ -18860,26 +18860,26 @@ wwv_flow_api.create_page_process(
 ,p_attribute_01=>'PLSQL_CODE'
 ,p_attribute_04=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'declare',
-'	l_coll_name varchar2(30) := ''IP_COLLECTION'';',
+'	l_coll_name varchar2(30) := ''AN_COLLECTION'';',
 'begin',
 '    case :APEX$ROW_STATUS',
 '    when ''C'' then',
 '        :SEQ_ID := APEX_COLLECTION.ADD_MEMBER (',
 '                        p_collection_name => l_coll_name,',
-'                        p_c001 => :ICON,',
-'                        p_c002 => :ICON_ONLY,',
-'                        p_c003 => :ICON_RO,',
-'                        p_c004 => :ID_DISK,',
+'                        p_c001 => :AN,',
+'                        p_c002 => :AN_ONLY,',
+'                        p_c003 => :AN_RO,',
+'                        p_c004 => :AN_ONLY_RO,',
 '                        p_c005 => :READ_ONLY',
 '                    );',
 '    when ''U'' then',
 '        APEX_COLLECTION.UPDATE_MEMBER (',
 '                    p_collection_name => l_coll_name,',
 '                    p_seq => :SEQ_ID,',
-'                    p_c001 => :ICON,',
-'                    p_c002 => :ICON_ONLY,',
-'                    p_c003 => :ICON_RO,',
-'                    p_c004 => :ID_DISK,',
+'                    p_c001 => :AN,',
+'                    p_c002 => :AN_ONLY,',
+'                    p_c003 => :AN_RO,',
+'                    p_c004 => :AN_ONLY_RO,',
 '                    p_c005 => :READ_ONLY);',
 '    when ''D'' then',
 '       APEX_COLLECTION.DELETE_MEMBER (',
