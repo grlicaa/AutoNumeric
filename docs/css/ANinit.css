@@ -1,0 +1,15 @@
+/*! ANinit.1css v1.0 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si */
+.ig-div-autonumeric,
+.ig-auto-numeric {
+    width:100%;
+}
+
+.ig-autonumeric-custom {
+    line-height:32px;
+}
+
+.ig-div-autonumeric.ig-autonumeric-custom {
+    height:100%;
+}
+
+/*# sourceMappingURL=ANinit.css.map */
