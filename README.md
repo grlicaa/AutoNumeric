@@ -77,9 +77,10 @@ style="text-align:right;"
 <pre>
 {
     currencySymbol: " €",
-    aSep: '.', 
-    aDec: ',',
-    aForm: true
+    currencySymbolPlacement: "s",
+    decimalCharacter: ",",
+    decimalCharacterAlternative: ".",
+    digitGroupSeparator: "."
 }
 </pre><br>
 #### Simple style
