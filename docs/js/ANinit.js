@@ -1,5 +1,5 @@
 /**
- * ANinit.js v1.0.1 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
+ * ANinit.js v1.0.2 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
  * User with Oracle APEX plug-in to render data
  * © 2020 Andrej Grlica
  * Dependencies : autonumeric.js@4.6.0
@@ -17,46 +17,6 @@ function ANgetNumStr(pVal, pOpt, isRplace) {
 	return {val:lreturn, class:lclasses};
 }
 
-function ANIGevents(itemId, opt, isRplace) {
-    
-	var ANelem;
-
-	$("#"+itemId).focusin(function(hnd) {
-		var lVal = $(this).val();
-		apex.debug.message(5, "[Plug-in AN] focusin %s value :%s", itemId, lVal);
-		if (lVal)
-			ANelem = new AutoNumeric(this, (isRplace?((""+lVal).replace(",",".")):lVal) , opt );	
-		else
-			ANelem = new AutoNumeric(this, opt );	
-
-		if (lVal == "" && ANelem.settings.styleRules) {
-			if (ANelem.settings.styleRules.ranges) {
-				Object.getOwnPropertyNames(ANelem.settings.styleRules.ranges).forEach(function(val, idx, array) {
-					if (val == "class")
-						$("#"+itemId).removeClass(ANelem.settings.styleRules.ranges[val]);
-				  });
-			}
-			else {
-				Object.getOwnPropertyNames(ANelem.settings.styleRules).forEach(function(val, idx, array) {
-					$("#"+itemId).removeClass(ANelem.settings.styleRules[val]);
-				});
-			}
-		}
-		ANelem.reformat();		
-	} );	 
-
-	$("#"+itemId).focusout(function() {
-		var result  = "";
-		if (ANelem.get()!="") {
-			result =(isRplace?((""+ ANelem.getNumber()).replace(".",",")): ANelem.getNumber()) ;
-		}
-		ANelem.remove();
-		apex.debug.message(5, "[Plug-in AN] focusout %s value :%s", itemId, result);
-		$(this).val(result);
-	});
-  
-}
-
 function ANIGsetAliment(itemId) {
 	var $elm = $("div.ig-div-autonumeric:has(input[id^='"+itemId+"_']):first").parent();
 	if ($elm.hasClass("u-tE")) {
@@ -68,13 +28,10 @@ function ANIGsetAliment(itemId) {
 }
 
 function ANIGinit(itemId, opt, isRplace) {
-  apex.debug.message(4,"[Plug-in AN] ANIGinit(id:%s, replace_numbers:%s)", itemId,isRplace);
   var index = 0;
   const item$ = $('#'+itemId);
   const sr$ = item$.addClass('u-vh is-focusable')
 	.parent();
-
-  
 
   function render(value) {
 	var showVal = ANgetNumStr(value, opt, isRplace);	
@@ -102,61 +59,116 @@ function ANIGinit(itemId, opt, isRplace) {
   }
 
 	$( document ).ready(function() {
-		//add events focus in/out
-		ANIGevents(itemId, opt, isRplace);
-  
 		//add aliment
 		ANIGsetAliment(itemId);
-   });
-  
-  apex.item.create(itemId, {
-	setValue:function(pValue, pDisplayValue) {
-	  item$.val(pValue);
-	  //item$.closest('label').text(pDisplayValue);	  
-	  apex.debug.message(5, "[Plug-in AN] apex item: %s set value : %s",itemId,pValue);
-	},
-	disable:function() {
-	  item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-enabled');
-	  item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-disabled');
-	  item$.attr('readonly','readonly');
-	  item$.addClass('apex_disabled');
-	},
-    isDisabled: function() {
-        return item$.closest('.ig-div-autonumeric').hasClass('ig-div-autonumeric-disabled');
-    },	
-    enable:function() {
-		item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-disabled');
-		item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-enabled');
-		//item$.parents(":eq(1)").removeClass("is-readonly").attr("tabindex", "");
-		item$.removeAttr('readonly');
-		item$.removeClass('apex_disabled');
-    },
-    displayValueFor:function(value) {
-      return render(value);
-	}
-  });
-  
+	});
+
+	apex.item.create(itemId, {
+		setValue:function(pValue, pDisplayValue) {
+			if (AutoNumeric.isManagedByAutoNumeric("#"+this.id)) {
+				var el = AutoNumeric.getAutoNumericElement("#"+this.id);
+				if (pValue)
+					el.set((isRplace?((""+pValue).replace(",",".")):pValue));
+				else
+					el.set("");
+
+				if (pValue == "" && el.settings.styleRules) {
+					if (el.settings.styleRules.ranges) {
+						Object.getOwnPropertyNames(el.settings.styleRules.ranges).forEach(function(val, idx, array) {
+							if (val == "class")
+								$("#"+itemId).removeClass(el.settings.styleRules.ranges[val]);
+							});
+					}
+					else {
+						Object.getOwnPropertyNames(el.settings.styleRules).forEach(function(val, idx, array) {
+							$("#"+itemId).removeClass(el.settings.styleRules[val]);
+						});
+					}
+				}				
+				el.reformat();		  
+			}
+			else {
+				apex.jQuery('#' + this.id).val((isRplace?((""+pValue).replace(",",".")):pValue) );
+				new AutoNumeric("#"+this.id, opt );	
+			}
+		},
+		getValue:function() {
+			var lVal = "";
+			if (AutoNumeric.isManagedByAutoNumeric("#"+this.id)) {
+				var el = AutoNumeric.getAutoNumericElement("#"+this.id);
+				if (el.get() && el.get() != "") {
+					var result = el.getNumber();
+					lVal = (isRplace?((""+result).replace(".",",")):""+result);
+				}
+			}
+			return lVal;		
+		},
+		disable:function() {
+		item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-enabled');
+		item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-disabled');
+		item$.attr('readonly','readonly');
+		item$.addClass('apex_disabled');
+		},
+		isDisabled: function() {
+			return item$.closest('.ig-div-autonumeric').hasClass('ig-div-autonumeric-disabled');
+		},	
+		enable:function() {
+			item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-disabled');
+			item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-enabled');
+			item$.removeAttr('readonly');
+			item$.removeClass('apex_disabled');
+		},
+		displayValueFor:function(value) {
+		return render(value);
+		}
+	});
 }
 
 function ANForminit(itemId, opt, isRplace) {
 
-	apex.debug.message(4,"[Plug-in AN] ANForminit(id:%s, replace_numbers:%s)", itemId,isRplace);
-
 	new AutoNumeric("#"+itemId, opt);
 	
-	apex.jQuery( apex.gPageContext$ ).on( "apexbeforepagesubmit", function() {
-		
-		if (AutoNumeric.isManagedByAutoNumeric("#"+itemId)) {
-			var el = AutoNumeric.getAutoNumericElement("#"+itemId);
-			if (el.get()!="") {
-				 var result = el.getNumber()
-				 el.remove();
-				 var lVal = (isRplace?((""+result).replace(".",",")):result);
-				 apex.debug.message(5,"[Plug-in AN] apexbeforepagesubmit id:%s, value:%s", itemId,lVal);
-				 apex.item(itemId ).setValue(lVal);
-			 }
+	apex.widget.initPageItem(itemId, {
+		setValue:function(pValue, pDisplayValue) {
+			if (AutoNumeric.isManagedByAutoNumeric("#"+this.id)) {
+				var el = AutoNumeric.getAutoNumericElement("#"+this.id);
+				if (pValue)
+					el.set((isRplace?((""+pValue).replace(",",".")):pValue));
+				else
+					el.set("");
+	
+				if (pValue == "" && el.settings.styleRules) {
+					if (el.settings.styleRules.ranges) {
+						Object.getOwnPropertyNames(el.settings.styleRules.ranges).forEach(function(val, idx, array) {
+							if (val == "class")
+								$("#"+itemId).removeClass(el.settings.styleRules.ranges[val]);
+							});
+					}
+					else {
+						Object.getOwnPropertyNames(el.settings.styleRules).forEach(function(val, idx, array) {
+							$("#"+itemId).removeClass(el.settings.styleRules[val]);
+						});
+					}
+				}				
+				el.reformat();		  
+			}
+			else {
+				apex.jQuery('#' + this.id).val((isRplace?((""+pValue).replace(",",".")):pValue) );
+				new AutoNumeric("#"+this.id, opt );	
+			}
+		},
+		getValue:function() {
+			var lVal = "";
+			if (AutoNumeric.isManagedByAutoNumeric("#"+this.id)) {
+				var el = AutoNumeric.getAutoNumericElement("#"+this.id);
+				if (el.get() && el.get() != "") {
+					 var result = el.getNumber();
+					 lVal = (isRplace?((""+result).replace(".",",")):""+result);
+				 }
+			}	
+			return lVal;
 		}
-	} );
+	  });
 	
 
 	$("#"+itemId).focusin(function(hnd) {

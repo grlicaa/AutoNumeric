@@ -60,7 +60,13 @@ With this we set padding:0px;
 
 ##### Settings
 Here you can set up options of your AutoNumeric field. For more options and details please visit AutoNumeric  [configurator](http://autonumeric.org/configurator).
-##### Aliment<
+##### Usage
+It can be used with following sample :
+<pre>
+apex.item("ITEM_NAME").setValue("3432.32");
+apex.item("ITEM_NAME").getValue();
+</pre>
+##### Aliment
 Field is basically text field, but can be align with a "Advanced Custom Attribute" setting :<br/>
 style="text-align:right;"
 
@@ -127,12 +133,12 @@ style="text-align:right;"
 To use styles or range style add following css inline 
 <pre>
 /* Form item */
-.an_color .apex-item-text.u-color-4:focus {
+.apex-item-text.apex-item-autonumeric.u-color-4:focus {
     background-color: #3CAF85 !important;
     fill: #3CAF85 !important;
     color: #f0faf6 !important;
 }
-.an_color .apex-item-text.u-color-9:focus {
+.apex-item-text.apex-item-autonumeric.u-color-9:focus {
     background-color: #E95B54 !important;
     fill: #E95B54 !important;
     color: #f0faf6 !important;
