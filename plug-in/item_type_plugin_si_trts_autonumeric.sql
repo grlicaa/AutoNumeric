@@ -6,25 +6,25 @@ whenever sqlerror exit sql.sqlcode rollback
 -- ORACLE Application Express (APEX) export file
 --
 -- You should run the script connected to SQL*Plus as the Oracle user
--- APEX_180200 or as the owner (parsing schema) of the application.
+-- APEX_180100 or as the owner (parsing schema) of the application.
 --
 -- NOTE: Calls to apex_application_install override the defaults below.
 --
 --------------------------------------------------------------------------------
 begin
 wwv_flow_api.import_begin (
- p_version_yyyy_mm_dd=>'2018.05.24'
-,p_release=>'18.2.0.00.12'
-,p_default_workspace_id=>3093701671471885
-,p_default_application_id=>107
-,p_default_owner=>'IT4FM'
+ p_version_yyyy_mm_dd=>'2018.04.04'
+,p_release=>'18.1.0.00.45'
+,p_default_workspace_id=>61716057417882438171
+,p_default_application_id=>100
+,p_default_owner=>'ANDREJGR'
 );
 end;
 /
 prompt --application/shared_components/plugins/item_type/si_trts_autonumeric
 begin
 wwv_flow_api.create_plugin(
- p_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1650278421686091)
 ,p_plugin_type=>'ITEM TYPE'
 ,p_name=>'SI_TRTS_AUTONUMERIC'
 ,p_display_name=>'AutoNumeric'
@@ -169,11 +169,11 @@ wwv_flow_api.create_plugin(
 ,p_help_text=>'APEX Plug-in built on top of <strong>http://autonumeric.org/</strong> library.'
 ,p_version_identifier=>'4.6.0.1'
 ,p_about_url=>'https://github.com/grlicaa/AutoNumeric'
-,p_files_version=>57
+,p_files_version=>8
 );
 wwv_flow_api.create_plugin_attribute(
- p_id=>wwv_flow_api.id(22064034019379944)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1650476402692350)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>1
 ,p_display_sequence=>10
@@ -322,8 +322,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22061336976371387)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1650868445698333)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'css/ANinit.css'
 ,p_mime_type=>'text/css'
 ,p_file_charset=>'utf-8'
@@ -344,8 +344,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22061556918371390)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1651178445698334)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'css/ANinit.css.map'
 ,p_mime_type=>'application/octet-stream'
 ,p_file_charset=>'utf-8'
@@ -363,8 +363,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22061992692371394)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1651518399698334)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'css/ANinit.min.css'
 ,p_mime_type=>'text/css'
 ,p_file_charset=>'utf-8'
@@ -437,8 +437,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22062391008371397)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1651922404698334)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'js/ANinit.js'
 ,p_mime_type=>'application/x-javascript'
 ,p_file_charset=>'utf-8'
@@ -521,8 +521,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22062824792371402)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1652339802698335)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'js/ANinit.js.map'
 ,p_mime_type=>'application/octet-stream'
 ,p_file_charset=>'utf-8'
@@ -576,8 +576,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22063146107371409)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1652792624698336)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'js/ANinit.min.js'
 ,p_mime_type=>'application/x-javascript'
 ,p_file_charset=>'utf-8'
@@ -2578,8 +2578,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(22063631345371413)
-,p_plugin_id=>wwv_flow_api.id(22060667741368940)
+ p_id=>wwv_flow_api.id(1653184199698336)
+,p_plugin_id=>wwv_flow_api.id(1650278421686091)
 ,p_file_name=>'js/autonumeric.min.js'
 ,p_mime_type=>'application/x-javascript'
 ,p_file_charset=>'utf-8'

@@ -26,15 +26,16 @@ https://apex.oracle.com/pls/apex/f?p=122979
 
 #### Browsers
 <ul>
-<li>FireFox 65.0</li>
-<li>Chrome 71.0.3578.98</li>
-<li>Microsoft Edge 42.17134.1.0</li>
-<li>IE 11.523</li>
+<li>FireFox 80.0</li>
+<li>Chrome 85.0</li>
+<li>Microsoft Edge 85.0</li>
+<li>IE 11.x</li>
 </ul>
 
 
 #### Oracle APEX Versions
 <ul>
+<li>Application Express 18.1</li>
 <li>Application Express 18.2</li>
 <li>Application Express 19.1</li>
 <li>Application Express 19.2</li>
