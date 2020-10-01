@@ -15,6 +15,7 @@
     "url" : "https://github.com/grlicaa/AutoNumeric.git"
   },
   "oracle" : {
+    "versions" : ["11.2.0.1", "12.1.0.1"], 
     "apex" : {
       "versions" : ["18.1.0", "18.2.0", "19.1.0", "19.2.0", "20.1.0"],
       "plugin" : {
