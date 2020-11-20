@@ -1,5 +1,5 @@
 /**
- * ANinit.js v1.0.2 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
+ * ANinit.js v1.0.3 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
  * User with Oracle APEX plug-in to render data
  * © 2020 Andrej Grlica
  * Dependencies : autonumeric.js@4.6.0

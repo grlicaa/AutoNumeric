@@ -1,4 +1,4 @@
-/*! ANinit.1css v1.0.2 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si */
+/*! ANinit.1css v1.0.3 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si */
 .ig-div-autonumeric,
 .ig-auto-numeric {
     width:100%;
@@ -10,5 +10,10 @@
 
 .ig-div-autonumeric.ig-autonumeric-custom {
     height:100%;
+}
+/* IG 20.2 height variable fix */
+.ig-auto-numeric {
+    height: 100%!important;
+    /*height: var(--a-gv-cell-height)!important; /* also works with 20.2*/
 }
 /*# sourceMappingURL=ANinit.css.map */

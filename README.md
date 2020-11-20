@@ -1,7 +1,7 @@
 # AutoNumeric (AN)
 
 APEX Plug-in built on top of [AutoNumeric.js](http://autonumeric.org/) library.
-Plugin even uses NLS setting, to detect database setting ".," or ".,".
+Plugin even uses NLS setting, to detect database setting ".," or ",.".
 
 ## Demo
 A demo application is available on apex.oracle.com<br/>
@@ -9,6 +9,13 @@ https://apex.oracle.com/pls/apex/f?p=122979
 
 ## Preview
 ![](https://github.com/grlicaa/AutoNumeric/blob/master/docs/preview/AutoNumericPreview.gif)
+
+
+## Change log
+#### V 4.6.0.2 - 19.11.2020
+<ul>
+<li>Fixed APEX 20.2 "height: var" problem in css file</li>  
+</ul>
 
 ## Install
 
@@ -40,6 +47,7 @@ https://apex.oracle.com/pls/apex/f?p=122979
 <li>Application Express 19.1</li>
 <li>Application Express 19.2</li>
 <li>Application Express 20.1</li>
+<li>Application Express 20.2</li>
 </ul>
 
 
