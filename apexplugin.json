@@ -1,6 +1,6 @@
 {
   "name" : "AutoNumeric",
-  "version" : "4.6.0.2",
+  "version" : "4.6.0.3",
   "description" : "Oracle Application Express item Plug-in for AutoNumeric format (Page item and Interactive Grid)",
   "keywords" : ["auto", "numeric", "auto numeric", "numeric mask", "format mask"],
   "homepage" : "https://github.com/grlicaa/AutoNumeric",

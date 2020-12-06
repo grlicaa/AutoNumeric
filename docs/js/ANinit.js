@@ -1,5 +1,5 @@
 /**
- * ANinit.js v1.0.3 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
+ * ANinit.js v1.0.4 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
  * User with Oracle APEX plug-in to render data
  * © 2020 Andrej Grlica
  * Dependencies : autonumeric.js@4.6.0
@@ -104,10 +104,10 @@ function ANIGinit(itemId, opt, isRplace) {
 			return lVal;		
 		},
 		disable:function() {
-		item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-enabled');
-		item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-disabled');
-		item$.attr('readonly','readonly');
-		item$.addClass('apex_disabled');
+			item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-enabled');
+			item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-disabled');
+			item$.attr('readonly','readonly');
+			item$.addClass('apex_disabled');
 		},
 		isDisabled: function() {
 			return item$.closest('.ig-div-autonumeric').hasClass('ig-div-autonumeric-disabled');
@@ -119,7 +119,7 @@ function ANIGinit(itemId, opt, isRplace) {
 			item$.removeClass('apex_disabled');
 		},
 		displayValueFor:function(value) {
-		return render(value);
+			return render(value);
 		}
 	});
 }
@@ -156,6 +156,10 @@ function ANForminit(itemId, opt, isRplace) {
 				apex.jQuery('#' + this.id).val((isRplace?((""+pValue).replace(",",".")):pValue) );
 				new AutoNumeric("#"+this.id, opt );	
 			}
+
+		},
+		isChanged:function() {
+			return (this.node.defaultValue != this.getValue());
 		},
 		getValue:function() {
 			var lVal = "";
