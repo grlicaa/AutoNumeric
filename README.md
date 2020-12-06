@@ -97,8 +97,8 @@ Field is basically text field, but can be align with a "Advanced Custom Attribut
 
 ```json
 {
-    currencySymbol: " €",
-    currencySymbolPlacement: "s"
+    "currencySymbol": " €",
+    "currencySymbolPlacement": "s"
 }
 ```
 
@@ -106,11 +106,11 @@ Field is basically text field, but can be align with a "Advanced Custom Attribut
 
 ```json
 {
-    currencySymbol: " €",
-    currencySymbolPlacement: "s",
-    decimalCharacter: ",",
-    decimalCharacterAlternative: ".",
-    digitGroupSeparator: "."
+    "currencySymbol": " €",
+    "currencySymbolPlacement": "s",
+    "decimalCharacter": ",",
+    "decimalCharacterAlternative": ".",
+    "digitGroupSeparator": "."
 }
 ```
 
@@ -118,9 +118,9 @@ Field is basically text field, but can be align with a "Advanced Custom Attribut
 
 ```json
 {
-     styleRules: {
-        positive: "u-color-4",
-        negative: "u-color-9"
+     "styleRules": {
+        "positive": "u-color-4",
+        "negative": "u-color-9"
     }
 }
 ```
@@ -128,29 +128,29 @@ Field is basically text field, but can be align with a "Advanced Custom Attribut
 #### Range style
 
 ```json
-{   currencySymbol: " %",
-    currencySymbolPlacement: "s",
-    styleRules: {
-        ranges: [
+{   "currencySymbol": " %",
+    "currencySymbolPlacement": "s",
+    "styleRules": {
+        "ranges": [
             {
-                min: 0,
-                max: 25,
-                class: "u-color-2"
+                "min": 0,
+                "max": 25,
+                "class": "u-color-2"
             },
             {
-                min: 25,
-                max: 50,
-                class: "u-color-4"
+                "min": 25,
+                "max": 50,
+                "class": "u-color-4"
             },
             {
-                min: 50,
-                max: 75,
-                class: "u-color-8"
+                "min": 50,
+                "max": 75,
+                "class": "u-color-8"
             },
             {
-                min: 75,
-                max: 100,
-                class: "u-color-9"
+                "min": 75,
+                "max": 100,
+                "class": "u-color-9"
             }
         ]
     }
