@@ -14,6 +14,16 @@ A demo application is available on
 
 ## Change log
 
+### V 4.6.0.4 - 02.02.2021
+
+- Added new parameter "Alignment" onm page item [#2](https://github.com/grlicaa/AutoNumeric/issues/2)
+- Fixed "Warn before exit for decimal" issue [#3](https://github.com/grlicaa/AutoNumeric/issues/3)
+- Read only now follows APEX conventions [#4](https://github.com/grlicaa/AutoNumeric/issues/4)
+- How to use global JS variable documentation  [#5](https://github.com/grlicaa/AutoNumeric/issues/5)
+- Interactive Grid item improvements :
+    1. Accessibility improvement ("Enter" key)
+    2. Added support for "Placeholder" option
+
 ### V 4.6.0.3 - 06.12.2020
 
 - Fixed "Warn on Unsaved Changes" issue [#1](https://github.com/grlicaa/AutoNumeric/issues/1)
@@ -61,20 +71,16 @@ A demo application is available on
 
 Here you can set up options of your AutoNumeric field. For more options and details please visit AutoNumeric  [configurator](http://autonumeric.org/configurator).
 
-##### Aliment
+##### Alignment
 
-Filed uses aliment defined by column attribute.
+Filed uses alignment defined by column attribute.
 
 ##### Padding size
 
 If you use coloring css styles or ranges add class *"padding-none"* to column to get full size.
-With this we set padding:0px;
+In this plug-in default setting per IG column is "padding:0px";
 
 #### Form item
-
-##### Settings
-
-Here you can set up options of your AutoNumeric field. For more options and details please visit AutoNumeric  [configurator](http://autonumeric.org/configurator).
 
 ##### Usage
 
@@ -85,13 +91,28 @@ apex.item("ITEM_NAME").setValue("3432.32");
 apex.item("ITEM_NAME").getValue();
 ```
 
-##### Aliment
+##### Alignment
 
-Field is basically text field, but can be align with a "Advanced Custom Attribute" setting
+Is now declarative option. In case when developer don't define position. Default setting from "Component settings" will be applied.
 
-```style="text-align:right;"```
+### ITEM options / examples
 
-### Examples
+In this section are some default example on how to use ITEM options. For more options and details please visit AutoNumeric  [configurator](http://autonumeric.org/configurator).
+
+Option can be per plug-in instance or global setting.
+Global setting can be in two types :
+    1. global JS variable (page, global)
+       Example :
+       ```javascript
+            var an_options = {
+                currencySymbol: " €",
+                currencySymbolPlacement: "s",
+                styleRules: {
+                    positive: "u-color-4",
+                    negative: "u-color-9"
+                }
+            };```
+    2. substitution string (Examples: &AI_AN_OPTIONS., &APP_AN_OPTIONS.)
 
 #### Default
 

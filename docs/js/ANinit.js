@@ -1,67 +1,56 @@
 /**
- * ANinit.js v1.0.4 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
+ * ANinit.js v1.2.0 | THE RIGHT THING SOLUTIONS d.o.o. | Andrej Grlica | andrej.grlica@right-thing.solutions.si 
  * User with Oracle APEX plug-in to render data
  * © 2020 Andrej Grlica
  * Dependencies : autonumeric.js@4.6.0
  * Released under the MIT License.
  */
-function ANgetNumStr(pVal, pOpt, isRplace) {
-	var x = document.createElement("input");
-	    x.setAttribute("type", "hidden");
-	
-	var anElement  = new AutoNumeric(x, (isRplace?((""+pVal).replace(",",".")):pVal), pOpt );
-	var lreturn = anElement.getFormatted();	
-	var lclasses = $(x).attr("class");
-
-
-	return {val:lreturn, class:lclasses};
-}
-
-function ANIGsetAliment(itemId) {
-	var $elm = $("div.ig-div-autonumeric:has(input[id^='"+itemId+"_']):first").parent();
-	if ($elm.hasClass("u-tE")) {
-		$("#"+itemId).css("text-align","right");
-	}
-	else if ($elm.hasClass("u-tC")) {
-		$("#"+itemId).css("text-align","center");
-	}
-}
-
 function ANIGinit(itemId, opt, isRplace) {
   var index = 0;
-  const item$ = $('#'+itemId);
-  const sr$ = item$.addClass('u-vh is-focusable')
-	.parent();
+  const $item = $('#'+itemId).addClass('u-vh is-focusable js-ignoreChange');
 
-  function render(value) {
-	var showVal = ANgetNumStr(value, opt, isRplace);	
-    const out = apex.util.htmlBuilder();
-    out.markup('<div')
-	  .attr('class', 'ig-div-autonumeric '+(showVal.class?"ig-autonumeric-custom "+showVal.class:""))
-	  .attr('class', )
-	  .markup('><input')
-      .attr('type', 'hidden')
-	  .attr('class', 'ig-auto-numeric')
-      .attr('id', itemId+'_'+index+'_0')
-	  .attr('name', itemId+'_'+index)
-	  .attr('value', (isRplace?((""+value).replace(".",",")):value))
-      .attr('tabindex', -1)
-      .markup(' /><label')
-	  .attr('for', itemId+'_'+index+'_0')
-      .markup('>')
-      .content(showVal.val)
-      .markup('</label>')
-	  .markup('</div>');
+	function ANgetNumStr(pVal) {
+		var x = document.createElement("input");
+			x.setAttribute("type", "hidden");
+		
+		var anElement  = new AutoNumeric(x, (isRplace?((""+pVal).replace(",",".")):pVal), opt );
+		var lreturn = anElement.getFormatted();	
+		var lclasses = $(x).attr("class");
 
-    index += 1;
-	
-    return out.toString();
-  }
+		return {val:lreturn, class:lclasses};
+	}
 
-	$( document ).ready(function() {
+	function ANIGsetAliment() {
+		var $elm = $("div[id^='"+itemId+"_'].ig-div-autonumeric:first").parent();
+		if ($elm.hasClass("u-tE")) {
+			$item.css("text-align","right");
+		}
+		else if ($elm.hasClass("u-tC")) {
+			$item.css("text-align","center");
+		}
+	}
+
+
+	function render(value) {
+		var showVal = ANgetNumStr(value);
+		const out = apex.util.htmlBuilder();
+		out.markup('<div')
+			.attr('class', 'ig-div-autonumeric '+(showVal.class?"ig-autonumeric-custom "+showVal.class:""))
+			.attr('id', itemId+'_'+index+'_0')
+			.markup('>')
+			.content(showVal.val)
+			.markup('</div>');
+
+		index += 1;
+		
+		return out.toString();
+	}
+
+ 	 $( document ).ready(function() {
 		//add aliment
-		ANIGsetAliment(itemId);
-	});
+		ANIGsetAliment();
+	});  
+
 
 	apex.item.create(itemId, {
 		setValue:function(pValue, pDisplayValue) {
@@ -76,19 +65,19 @@ function ANIGinit(itemId, opt, isRplace) {
 					if (el.settings.styleRules.ranges) {
 						Object.getOwnPropertyNames(el.settings.styleRules.ranges).forEach(function(val, idx, array) {
 							if (val == "class")
-								$("#"+itemId).removeClass(el.settings.styleRules.ranges[val]);
+								$item.removeClass(el.settings.styleRules.ranges[val]);
 							});
 					}
 					else {
 						Object.getOwnPropertyNames(el.settings.styleRules).forEach(function(val, idx, array) {
-							$("#"+itemId).removeClass(el.settings.styleRules[val]);
+							$item.removeClass(el.settings.styleRules[val]);
 						});
 					}
 				}				
 				el.reformat();		  
 			}
 			else {
-				apex.jQuery('#' + this.id).val((isRplace?((""+pValue).replace(",",".")):pValue) );
+				$item.val((isRplace?((""+pValue).replace(",",".")):pValue) );
 				new AutoNumeric("#"+this.id, opt );	
 			}
 		},
@@ -104,19 +93,19 @@ function ANIGinit(itemId, opt, isRplace) {
 			return lVal;		
 		},
 		disable:function() {
-			item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-enabled');
-			item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-disabled');
-			item$.attr('readonly','readonly');
-			item$.addClass('apex_disabled');
+			$item.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-enabled');
+			$item.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-disabled');
+			$item.attr('readonly','readonly');
+			$item.addClass('apex_disabled');
 		},
 		isDisabled: function() {
-			return item$.closest('.ig-div-autonumeric').hasClass('ig-div-autonumeric-disabled');
+			return $item.closest('.ig-div-autonumeric').hasClass('ig-div-autonumeric-disabled');
 		},	
 		enable:function() {
-			item$.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-disabled');
-			item$.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-enabled');
-			item$.removeAttr('readonly');
-			item$.removeClass('apex_disabled');
+			$item.closest('.ig-div-autonumeric').removeClass('ig-div-autonumeric-disabled');
+			$item.closest('.ig-div-autonumeric').addClass('ig-div-autonumeric-enabled');
+			$item.removeAttr('readonly');
+			$item.removeClass('apex_disabled');
 		},
 		displayValueFor:function(value) {
 			return render(value);
@@ -124,7 +113,9 @@ function ANIGinit(itemId, opt, isRplace) {
 	});
 }
 
-function ANForminit(itemId, opt, isRplace) {
+function ANForminit(itemId, opt, isRplace, pClass) {
+
+	var $item = apex.jQuery("#"+itemId);
 
 	new AutoNumeric("#"+itemId, opt);
 	
@@ -141,25 +132,25 @@ function ANForminit(itemId, opt, isRplace) {
 					if (el.settings.styleRules.ranges) {
 						Object.getOwnPropertyNames(el.settings.styleRules.ranges).forEach(function(val, idx, array) {
 							if (val == "class")
-								$("#"+itemId).removeClass(el.settings.styleRules.ranges[val]);
+							$item.removeClass(el.settings.styleRules.ranges[val]);
 							});
 					}
 					else {
 						Object.getOwnPropertyNames(el.settings.styleRules).forEach(function(val, idx, array) {
-							$("#"+itemId).removeClass(el.settings.styleRules[val]);
+							$item.removeClass(el.settings.styleRules[val]);
 						});
 					}
 				}				
 				el.reformat();		  
 			}
 			else {
-				apex.jQuery('#' + this.id).val((isRplace?((""+pValue).replace(",",".")):pValue) );
+				$item.val((isRplace?((""+pValue).replace(",",".")):pValue) );
 				new AutoNumeric("#"+this.id, opt );	
 			}
 
 		},
 		isChanged:function() {
-			return (this.node.defaultValue != this.getValue());
+			return (this.node.defaultValue != (AutoNumeric.isManagedByAutoNumeric("#"+this.id) ? AutoNumeric.getNumber("#"+this.id) : this.getValue()));
 		},
 		getValue:function() {
 			var lVal = "";
@@ -173,13 +164,16 @@ function ANForminit(itemId, opt, isRplace) {
 			return lVal;
 		}
 	  });
-	
 
-	$("#"+itemId).focusin(function(hnd) {
+	if (pClass){
+		$item.addClass(pClass);
+	}	  
+
+	$item.focusin(function(hnd) {
 		$(this).parents(":eq(2)").addClass("is-active");
-	} );	 
+	});	 
 
-	$("#"+itemId).focusout(function() {
+	$item.focusout(function() {
 		$(this).parents(":eq(2)").removeClass("is-active");
 	});	
 }
