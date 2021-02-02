@@ -16,7 +16,7 @@ A demo application is available on
 
 ### V 4.6.0.4 - 02.02.2021
 
-- Added new parameter "Alignment" onm page item [#2](https://github.com/grlicaa/AutoNumeric/issues/2)
+- Added new parameter "Alignment" on page item [#2](https://github.com/grlicaa/AutoNumeric/issues/2)
 - Fixed "Warn before exit for decimal" issue [#3](https://github.com/grlicaa/AutoNumeric/issues/3)
 - Read only now follows APEX conventions [#4](https://github.com/grlicaa/AutoNumeric/issues/4)
 - How to use global JS variable documentation  [#5](https://github.com/grlicaa/AutoNumeric/issues/5)
