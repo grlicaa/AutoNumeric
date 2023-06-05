@@ -1,5 +1,13 @@
 # AutoNumeric (AN)
 
+## 🚨Important notice🚨
+This project was moved under the umbrella of United Codes PluginsPro. The plug-in AutoNumeric will still remain free and supported.
+For more information about the plug-in, please look at 
+[https://www.plug-ins-pro.com/ords/uc/r/plug-ins-pro/home](https://www.plug-ins-pro.com/ords/uc/r/plug-ins-pro/home)
+[GitHub](https://github.com/plug-ins-pro/auto_numeric)
+
+## About
+
 APEX Plug-in built on top of [AutoNumeric.js](http://autonumeric.org/) library.
 Plugin even uses NLS setting, to detect database setting ".," or ",.".
 
@@ -54,12 +62,12 @@ A demo application is available on
 
 ### Oracle APEX Versions
 
-- Application Express 18.1
-- Application Express 18.2
-- Application Express 19.1
-- Application Express 19.2
-- Application Express 20.1
-- Application Express 20.2
+- Application Express 18.x
+- Application Express 19.x
+- Application Express 20.x
+- Application Express 21.x
+- Application Express 22.x
+- Application Express 23.1
 
 ## Item settings
 
