@@ -3,7 +3,9 @@
 ## 🚨Important notice🚨
 This project was moved under the umbrella of United Codes PluginsPro. The plug-in AutoNumeric will still remain free and supported.
 For more information about the plug-in, please look at 
+
 [https://www.plug-ins-pro.com/ords/uc/r/plug-ins-pro/home](https://www.plug-ins-pro.com/ords/uc/r/plug-ins-pro/home)
+
 [GitHub](https://github.com/plug-ins-pro/auto_numeric)
 
 ## About
